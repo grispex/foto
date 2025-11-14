@@ -683,7 +683,9 @@ function getImagesForBox(imgSrc) {
     let images = [imgSrc];
     // Se esiste una cartella per questo box, aggiungi le immagini della cartella
     if (boxNumber && folderImages[boxNumber]) {
-        images = [imgSrc, ...folderImages[boxNumber]];
+        // Aggiungi 'assets/' ai percorsi delle immagini delle cartelle
+        const folderImagesWithPath = folderImages[boxNumber].map(imgPath => `assets/${imgPath}`);
+        images = [imgSrc, ...folderImagesWithPath];
     }
     return images;
 }
