@@ -683,9 +683,8 @@ function getImagesForBox(imgSrc) {
     let images = [imgSrc];
     // Se esiste una cartella per questo box, aggiungi le immagini della cartella
     if (boxNumber && folderImages[boxNumber]) {
-        // Aggiungi il prefisso 'foto/' ai percorsi delle immagini delle cartelle per GitHub
-        const folderImagesWithPath = folderImages[boxNumber].map(imgPath => `foto/${imgPath}`);
-        images = [imgSrc, ...folderImagesWithPath];
+        // Usa direttamente i percorsi come sono definiti in folderImages
+        images = [imgSrc, ...folderImages[boxNumber]];
     }
     return images;
 }
