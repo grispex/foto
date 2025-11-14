@@ -584,88 +584,88 @@ function isClickInsideAnyPopup(e) {
 // Mappatura delle immagini disponibili per ogni cartella numerata
 const folderImages = {
     2: [
-        '2/DSC01743 - dimensioni grandi.jpeg',
-        '2/DSC01744 - dimensioni grandi.jpeg'
+        '2/DSC01743.jpeg',
+        '2/DSC01744.jpeg'
     ],
     3: [
-        '3/DSC_2881 - dimensioni grandi.jpeg',
-        '3/DSC_2928 - dimensioni grandi.jpeg',
-        '3/DSC_2954 - dimensioni grandi.jpeg'
+        '3/DSC_2881.jpeg',
+        '3/DSC_2928.jpeg',
+        '3/DSC_2954.jpeg'
     ],
     5: [
-        '5/_17_00199 - dimensioni grandi.jpeg',
-        '5/_35_00217 - dimensioni grandi.jpeg',
-        '5/11A_00194 - dimensioni grandi.jpeg',
-        '5/12A_00195 - dimensioni grandi.jpeg'
+        '5/_17_00199.jpeg',
+        '5/_35_00217.jpeg',
+        '5/11A_00194.jpeg',
+        '5/12A_00195.jpeg'
     ],
     8: [
-        '8/_13_02107 - dimensioni grandi.jpeg',
-        '8/_29_02123 - dimensioni grandi.jpeg'
+        '8/_13_02107.jpeg',
+        '8/_29_02123.jpeg'
     ],
     9: [
-        '9/---_01255 - dimensioni grandi.jpeg',
-        '9/---_01262 - dimensioni grandi.jpeg',
-        '9/---_01272 - dimensioni grandi.jpeg',
-        '9/---_01274 - dimensioni grandi.jpeg'
+        '9/---_01255.jpeg',
+        '9/---_01262.jpeg',
+        '9/---_01272.jpeg',
+        '9/---_01274.jpeg'
     ],
     10: [
-        '10/000010800004 - dimensioni grandi.jpeg',
-        '10/000010800006 - dimensioni grandi.jpeg',
-        '10/000010800007 - dimensioni grandi.jpeg'
+        '10/000010800004.jpeg',
+        '10/000010800006.jpeg',
+        '10/000010800007.jpeg'
     ],
     11: [
-        '11/__8_00191 - dimensioni grandi.jpeg',
-        '11/_16_00198 - dimensioni grandi.jpeg',
-        '11/_31_00213 - dimensioni grandi.jpeg',
-        '11/_6A_00190 - dimensioni grandi.jpeg'
+        '11/__8_00191.jpeg',
+        '11/_16_00198.jpeg',
+        '11/_31_00213.jpeg',
+        '11/_6A_00190.jpeg'
     ],
     12: [
-        '12/_11_01454 - dimensioni grandi.jpeg',
-        '12/_17_01448 - dimensioni grandi.jpeg'
+        '12/_11_01454.jpeg',
+        '12/_17_01448.jpeg'
     ],
     13: [
-        '13/---_01256 - dimensioni grandi.jpeg',
-        '13/---_01260 - dimensioni grandi.jpeg',
-        '13/---_01267 - dimensioni grandi.jpeg'
+        '13/---_01256.jpeg',
+        '13/---_01260.jpeg',
+        '13/---_01267.jpeg'
     ],
     16: [
-        '16/__4_01461 - dimensioni grandi.jpeg',
-        '16/__5_01460 - dimensioni grandi.jpeg',
-        '16/_25_01440 - dimensioni grandi.jpeg'
+        '16/__4_01461.jpeg',
+        '16/__5_01460.jpeg',
+        '16/_25_01440.jpeg'
     ],
     17: [
-        '17/__4_00137 - dimensioni grandi.jpeg',
-        '17/__5_00138 - dimensioni grandi.jpeg',
-        '17/__6_00139 - dimensioni grandi.jpeg',
-        '17/__7_00140 - dimensioni grandi.jpeg'
+        '17/__4_00137.jpeg',
+        '17/__5_00138.jpeg',
+        '17/__6_00139.jpeg',
+        '17/__7_00140.jpeg'
     ],
     18: [
-        '18/SDC10012 - dimensioni grandi.jpeg',
-        '18/SDC10013 - dimensioni grandi.jpeg',
-        '18/SDC10036 - dimensioni grandi.jpeg',
-        '18/SDC10043 - dimensioni grandi.jpeg'
+        '18/SDC10012.jpeg',
+        '18/SDC10013.jpeg',
+        '18/SDC10036.jpeg',
+        '18/SDC10043.jpeg'
     ],
     20: [
-        '20/_14_02108 - dimensioni grandi.jpeg',
-        '20/_15_02109 - dimensioni grandi.jpeg',
-        '20/15A_02110 - dimensioni grandi.jpeg'
+        '20/_14_02108.jpeg',
+        '20/_15_02109.jpeg',
+        '20/15A_02110.jpeg'
     ],
     21: [
-        '21/100_3122 - dimensioni grandi.jpeg',
-        '21/100_3129 - dimensioni grandi.jpeg',
-        '21/100_3130 - dimensioni grandi.jpeg',
-        '21/100_3155 - dimensioni grandi.jpeg'
+        '21/100_3122.jpeg',
+        '21/100_3129.jpeg',
+        '21/100_3130.jpeg',
+        '21/100_3155.jpeg'
     ],
     22: [
-        '22/_5A_00896-2 - dimensioni grandi.jpeg',
-        '22/_8A_00899 - dimensioni grandi.jpeg',
-        '22/12A_00903 - dimensioni grandi.jpeg',
-        '22/14A_00905 - dimensioni grandi.jpeg',
-        '22/16A_00907 - dimensioni grandi.jpeg'
+        '22/_5A_00896-2.jpeg',
+        '22/_8A_00899.jpeg',
+        '22/12A_00903.jpeg',
+        '22/14A_00905.jpeg',
+        '22/16A_00907.jpeg'
     ],
     23: [
-        '23/18A_00909 - dimensioni grandi.jpeg',
-        '23/26A_00916-2 - dimensioni grandi.jpeg'
+        '23/18A_00909.jpeg',
+        '23/26A_00916-2.jpeg'
     ]
 };
 
