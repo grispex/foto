@@ -182,7 +182,8 @@ function createPopup(imgSrc) {
     showOverlay();
     const newPopup = document.createElement('div');
     newPopup.className = 'popup-container';
-    newPopup.style.display = 'flex';
+    // NASCONDI il popup finché l'immagine non è caricata
+    newPopup.style.display = 'none';
     
     const content = document.createElement('div');
     content.className = 'popup-content';
@@ -210,6 +211,9 @@ function createPopup(imgSrc) {
     img.src = imgSrc;
     img.alt = 'Immagine ingrandita';
     
+    // Aggiungi il popup allo stack IMMEDIATAMENTE, prima che l'immagine si carichi
+    popupStack.push(newPopup);
+    
     // Imposta l'aspect ratio iniziale quando l'immagine è caricata
     img.onload = () => {
         originalAspectRatio = img.naturalWidth / img.naturalHeight;
@@ -234,9 +238,32 @@ function createPopup(imgSrc) {
         content.style.left = `${pos.left}px`;
         content.style.top = `${pos.top}px`;
         
-        // Aggiungi il popup allo stack e imposta il z-index
-        popupStack.push(newPopup);
+        // MOSTRA il popup solo quando l'immagine è caricata
+        newPopup.style.display = 'flex';
+        
+        // Imposta il z-index
         bringToFront(newPopup);
+    };
+    
+    // Gestisci anche il caso in cui l'immagine non si carichi
+    img.onerror = () => {
+        // Se l'immagine non si carica, RIMUOVI il popup invece di mostrarlo
+        const index = popupStack.indexOf(newPopup);
+        if (index !== -1) {
+            popupStack.splice(index, 1);
+        }
+        if (newPopup.parentNode) {
+            newPopup.remove();
+        }
+        
+        // Se non ci sono più popup, nascondi l'overlay
+        if (popupStack.length === 0) {
+            hideOverlay();
+            streetNameElement.classList.remove('visible');
+            if (config.boxSize >= 280) {
+                nameElement.style.display = 'block';
+            }
+        }
     };
     
     content.appendChild(img);
@@ -270,22 +297,6 @@ function createPopup(imgSrc) {
         }
         mouseDownOnPopup = !isOutside;
     }, { passive: false });
-    
-    // Gestione della chiusura del popup
-    document.addEventListener('mousedown', (e) => {
-        const rect = content.getBoundingClientRect();
-        const isOutside = e.clientX < rect.left || e.clientX > rect.right ||
-                        e.clientY < rect.top || e.clientY > rect.bottom;
-        
-        if (isOutside && !isClickInsideAnyPopup(e)) {
-            const index = popupStack.indexOf(newPopup);
-            if (index !== -1) {
-                popupStack.splice(index, 1);
-                newPopup.remove();
-                isMultiPopupMode = popupStack.length > 1;
-            }
-        }
-    });
     
     newPopup.appendChild(content);
     document.body.appendChild(newPopup);
@@ -573,94 +584,94 @@ function isClickInsideAnyPopup(e) {
 // Mappatura delle immagini disponibili per ogni cartella numerata
 const folderImages = {
     2: [
-        'assets/2/DSC01743 - dimensioni grandi.jpeg',
-        'assets/2/DSC01744 - dimensioni grandi.jpeg'
+        '2/DSC01743 - dimensioni grandi.jpeg',
+        '2/DSC01744 - dimensioni grandi.jpeg'
     ],
     3: [
-        'assets/3/DSC_2881 - dimensioni grandi.jpeg',
-        'assets/3/DSC_2928 - dimensioni grandi.jpeg',
-        'assets/3/DSC_2954 - dimensioni grandi.jpeg'
+        '3/DSC_2881 - dimensioni grandi.jpeg',
+        '3/DSC_2928 - dimensioni grandi.jpeg',
+        '3/DSC_2954 - dimensioni grandi.jpeg'
     ],
     5: [
-        'assets/5/_17_00199 - dimensioni grandi.jpeg',
-        'assets/5/_35_00217 - dimensioni grandi.jpeg',
-        'assets/5/11A_00194 - dimensioni grandi.jpeg',
-        'assets/5/12A_00195 - dimensioni grandi.jpeg'
+        '5/_17_00199 - dimensioni grandi.jpeg',
+        '5/_35_00217 - dimensioni grandi.jpeg',
+        '5/11A_00194 - dimensioni grandi.jpeg',
+        '5/12A_00195 - dimensioni grandi.jpeg'
     ],
     8: [
-        'assets/8/_13_02107 - dimensioni grandi.jpeg',
-        'assets/8/_29_02123 - dimensioni grandi.jpeg'
+        '8/_13_02107 - dimensioni grandi.jpeg',
+        '8/_29_02123 - dimensioni grandi.jpeg'
     ],
     9: [
-        'assets/9/---_01255 - dimensioni grandi.jpeg',
-        'assets/9/---_01262 - dimensioni grandi.jpeg',
-        'assets/9/---_01272 - dimensioni grandi.jpeg',
-        'assets/9/---_01274 - dimensioni grandi.jpeg'
+        '9/---_01255 - dimensioni grandi.jpeg',
+        '9/---_01262 - dimensioni grandi.jpeg',
+        '9/---_01272 - dimensioni grandi.jpeg',
+        '9/---_01274 - dimensioni grandi.jpeg'
     ],
     10: [
-        'assets/10/000010800004 - dimensioni grandi.jpeg',
-        'assets/10/000010800006 - dimensioni grandi.jpeg',
-        'assets/10/000010800007 - dimensioni grandi.jpeg'
+        '10/000010800004 - dimensioni grandi.jpeg',
+        '10/000010800006 - dimensioni grandi.jpeg',
+        '10/000010800007 - dimensioni grandi.jpeg'
     ],
     11: [
-        'assets/11/__8_00191 - dimensioni grandi.jpeg',
-        'assets/11/_16_00198 - dimensioni grandi.jpeg',
-        'assets/11/_31_00213 - dimensioni grandi.jpeg',
-        'assets/11/_6A_00190 - dimensioni grandi.jpeg'
+        '11/__8_00191 - dimensioni grandi.jpeg',
+        '11/_16_00198 - dimensioni grandi.jpeg',
+        '11/_31_00213 - dimensioni grandi.jpeg',
+        '11/_6A_00190 - dimensioni grandi.jpeg'
     ],
     12: [
-        'assets/12/_11_01454 - dimensioni grandi.jpeg',
-        'assets/12/_17_01448 - dimensioni grandi.jpeg'
+        '12/_11_01454 - dimensioni grandi.jpeg',
+        '12/_17_01448 - dimensioni grandi.jpeg'
     ],
     13: [
-        'assets/13/---_01256 - dimensioni grandi.jpeg',
-        'assets/13/---_01260 - dimensioni grandi.jpeg',
-        'assets/13/---_01267 - dimensioni grandi.jpeg'
+        '13/---_01256 - dimensioni grandi.jpeg',
+        '13/---_01260 - dimensioni grandi.jpeg',
+        '13/---_01267 - dimensioni grandi.jpeg'
     ],
     16: [
-        'assets/16/__4_01461 - dimensioni grandi.jpeg',
-        'assets/16/__5_01460 - dimensioni grandi.jpeg',
-        'assets/16/_25_01440 - dimensioni grandi.jpeg'
+        '16/__4_01461 - dimensioni grandi.jpeg',
+        '16/__5_01460 - dimensioni grandi.jpeg',
+        '16/_25_01440 - dimensioni grandi.jpeg'
     ],
     17: [
-        'assets/17/__4_00137 - dimensioni grandi.jpeg',
-        'assets/17/__5_00138 - dimensioni grandi.jpeg',
-        'assets/17/__6_00139 - dimensioni grandi.jpeg',
-        'assets/17/__7_00140 - dimensioni grandi.jpeg'
+        '17/__4_00137 - dimensioni grandi.jpeg',
+        '17/__5_00138 - dimensioni grandi.jpeg',
+        '17/__6_00139 - dimensioni grandi.jpeg',
+        '17/__7_00140 - dimensioni grandi.jpeg'
     ],
     18: [
-        'assets/18/SDC10012 - dimensioni grandi.jpeg',
-        'assets/18/SDC10013 - dimensioni grandi.jpeg',
-        'assets/18/SDC10036 - dimensioni grandi.jpeg',
-        'assets/18/SDC10043 - dimensioni grandi.jpeg'
+        '18/SDC10012 - dimensioni grandi.jpeg',
+        '18/SDC10013 - dimensioni grandi.jpeg',
+        '18/SDC10036 - dimensioni grandi.jpeg',
+        '18/SDC10043 - dimensioni grandi.jpeg'
     ],
     20: [
-        'assets/20/_14_02108 - dimensioni grandi.jpeg',
-        'assets/20/_15_02109 - dimensioni grandi.jpeg',
-        'assets/20/15A_02110 - dimensioni grandi.jpeg'
+        '20/_14_02108 - dimensioni grandi.jpeg',
+        '20/_15_02109 - dimensioni grandi.jpeg',
+        '20/15A_02110 - dimensioni grandi.jpeg'
     ],
     21: [
-        'assets/21/100_3122 - dimensioni grandi.jpeg',
-        'assets/21/100_3129 - dimensioni grandi.jpeg',
-        'assets/21/100_3130 - dimensioni grandi.jpeg',
-        'assets/21/100_3155 - dimensioni grandi.jpeg'
+        '21/100_3122 - dimensioni grandi.jpeg',
+        '21/100_3129 - dimensioni grandi.jpeg',
+        '21/100_3130 - dimensioni grandi.jpeg',
+        '21/100_3155 - dimensioni grandi.jpeg'
     ],
     22: [
-        'assets/22/_5A_00896-2 - dimensioni grandi.jpeg',
-        'assets/22/_8A_00899 - dimensioni grandi.jpeg',
-        'assets/22/12A_00903 - dimensioni grandi.jpeg',
-        'assets/22/14A_00905 - dimensioni grandi.jpeg',
-        'assets/22/16A_00907 - dimensioni grandi.jpeg'
+        '22/_5A_00896-2 - dimensioni grandi.jpeg',
+        '22/_8A_00899 - dimensioni grandi.jpeg',
+        '22/12A_00903 - dimensioni grandi.jpeg',
+        '22/14A_00905 - dimensioni grandi.jpeg',
+        '22/16A_00907 - dimensioni grandi.jpeg'
     ],
     23: [
-        'assets/23/18A_00909 - dimensioni grandi.jpeg',
-        'assets/23/26A_00916-2 - dimensioni grandi.jpeg'
+        '23/18A_00909 - dimensioni grandi.jpeg',
+        '23/26A_00916-2 - dimensioni grandi.jpeg'
     ]
 };
 
 // Funzione per estrarre il numero del box dal percorso dell'immagine
 function getBoxNumber(imgSrc) {
-    // Estrae il numero dal percorso, es. "assets/cover/8.jpeg" -> 8
+    // Estrae il numero dal percorso, es. "cover/8.jpeg" -> 8
     const match = imgSrc.match(/assets\/cover\/(\d+)\.jpeg/);
     return match ? parseInt(match[1], 10) : null;
 }
@@ -668,7 +679,7 @@ function getBoxNumber(imgSrc) {
 // Funzione aggiornata per ottenere tutte le immagini da caricare per un box
 function getImagesForBox(imgSrc) {
     const boxNumber = getBoxNumber(imgSrc);
-    // Sempre prima la copertina assets/cover/X.jpeg
+    // Sempre prima la copertina cover/X.jpeg
     let images = [imgSrc];
     // Se esiste una cartella per questo box, aggiungi le immagini della cartella
     if (boxNumber && folderImages[boxNumber]) {
@@ -870,11 +881,20 @@ document.querySelectorAll('.project').forEach((project, index) => {
     });
 });
 
-// Rimuovo il vecchio event listener del popup singolo e aggiungo quello nuovo
+// Event listener globale per chiudere tutti i popup quando si clicca fuori
 document.addEventListener('mousedown', (e) => {
-    if (!isClickInsideAnyPopup(e) && e.target !== overlay) {
-        closeAllPopups();
+    // Non chiudere se si clicca dentro un popup, sull'overlay, o su un elemento interattivo
+    if (isClickInsideAnyPopup(e) || e.target === overlay) {
+        return;
     }
+    
+    // Non chiudere se si sta trascinando o ridimensionando
+    if (isDragging || isResizing) {
+        return;
+    }
+    
+    // Chiudi tutti i popup
+    closeAllPopups();
 });
 
 document.addEventListener('keydown', (e) => {
@@ -969,9 +989,30 @@ function hideOverlay() {
 
 // Chiudi tutti i popup
 function closeAllPopups() {
+    // Rimuovi tutti i popup dallo stack
     while (popupStack.length > 0) {
         const p = popupStack.pop();
-        p.remove();
+        if (p && p.parentNode) {
+            p.remove();
+        }
+    }
+    
+    // Rimuovi anche tutti gli altri popup-container che potrebbero essere rimasti nel DOM
+    // (per sicurezza, nel caso alcuni non siano nello stack)
+    const allPopups = document.querySelectorAll('.popup-container');
+    allPopups.forEach(p => {
+        // Non rimuovere il popup iniziale (quello con id="imagePopup"), solo nasconderlo
+        if (p.id !== 'imagePopup' && p.parentNode) {
+            p.remove();
+        }
+    });
+    
+    // Nascondi anche il popup iniziale se presente
+    if (popup) {
+        popup.style.display = 'none';
+        if (popupImage) {
+            popupImage.src = '';
+        }
     }
     
     // Nascondi street_b/w
