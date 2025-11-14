@@ -690,13 +690,9 @@ function normalizePath(path) {
 // Funzione aggiornata per ottenere tutte le immagini da caricare per un box
 function getImagesForBox(imgSrc) {
     const boxNumber = getBoxNumber(imgSrc);
-    // Sempre prima la copertina cover/X.jpeg
-    let images = [normalizePath(imgSrc)];
-    // Se esiste una cartella per questo box, aggiungi le immagini della cartella
+    let images = [imgSrc];
     if (boxNumber && folderImages[boxNumber]) {
-        // Aggiungi il prefisso 'foto/' e normalizza i percorsi
-        const folderImagesWithPath = folderImages[boxNumber].map(imgPath => normalizePath(`foto/${imgPath}`));
-        images = [normalizePath(imgSrc), ...folderImagesWithPath];
+        images = [imgSrc, ...folderImages[boxNumber]];
     }
     return images;
 }
