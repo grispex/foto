@@ -672,7 +672,7 @@ const folderImages = {
 // Funzione per estrarre il numero del box dal percorso dell'immagine
 function getBoxNumber(imgSrc) {
     // Estrae il numero dal percorso, es. "cover/8.jpeg" -> 8
-    const match = imgSrc.match(/assets\/cover\/(\d+)\.jpeg/);
+    const match = imgSrc.match(/cover\/(\d+)\.jpeg/);
     return match ? parseInt(match[1], 10) : null;
 }
 
