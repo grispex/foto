@@ -676,15 +676,27 @@ function getBoxNumber(imgSrc) {
     return match ? parseInt(match[1], 10) : null;
 }
 
+// Funzione helper per normalizzare i percorsi (rende i percorsi assoluti per GitHub Pages)
+function normalizePath(path) {
+    // Se il percorso inizia già con / o http, non modificarlo
+    if (path.startsWith('/') || path.startsWith('http')) {
+        return path;
+    }
+    // Altrimenti, rendilo relativo alla root del sito
+    // Questo funziona sia per GitHub Pages che per sviluppo locale
+    return path.startsWith('./') ? path : `./${path}`;
+}
+
 // Funzione aggiornata per ottenere tutte le immagini da caricare per un box
 function getImagesForBox(imgSrc) {
     const boxNumber = getBoxNumber(imgSrc);
     // Sempre prima la copertina cover/X.jpeg
-    let images = [imgSrc];
+    let images = [normalizePath(imgSrc)];
     // Se esiste una cartella per questo box, aggiungi le immagini della cartella
     if (boxNumber && folderImages[boxNumber]) {
-        // Usa direttamente i percorsi come sono definiti in folderImages
-        images = [imgSrc, ...folderImages[boxNumber]];
+        // Aggiungi il prefisso 'foto/' e normalizza i percorsi
+        const folderImagesWithPath = folderImages[boxNumber].map(imgPath => normalizePath(`foto/${imgPath}`));
+        images = [normalizePath(imgSrc), ...folderImagesWithPath];
     }
     return images;
 }
